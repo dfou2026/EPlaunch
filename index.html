@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
-    <title>VIP EP</title>
+    <title>EP VIP</title>
     <style>
         body { 
-            background: #1877F2; 
+            background: #001f3f; 
             color: white; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex; 
@@ -18,51 +18,50 @@
             margin: 0; 
             text-align: center;
         }
-        .loader {
-            border: 4px solid rgba(255,255,255,0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+        /* This makes your sunset logo look like a nice app icon */
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 25px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .loader {
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid #FFD700;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .manual-link {
-            margin-top: 20px;
-            color: rgba(255,255,255,0.7);
+            margin-top: 30px;
+            color: rgba(255,255,255,0.5);
             text-decoration: underline;
-            font-size: 0.9rem;
-            cursor: pointer;
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
+    <img src="icon.png" class="app-logo" alt="EP VIP Logo">
+
     <div class="loader"></div>
-    <h2>Launching Your Group...</h2>
-    <p>We're taking you straight to the community.</p>
+    <h2>Opening EP VIP...</h2>
 
     <a id="fallback" class="manual-link" href="https://www.facebook.com/groups/1016237428504634">
         Click here if not redirected
     </a>
 
     <script>
-        // Your specific Facebook Group ID
         const groupId = "1016237428504634";
-        
-        // Deep link for the Facebook App
         const appLink = "fb://group/" + groupId;
-        // Standard link for the browser
         const webLink = "https://www.facebook.com/groups/" + groupId;
 
-        // 1. Try to open the Facebook App immediately
-        window.location.href = appLink;
-
-        // 2. Fallback to the web link if the app doesn't open
+        // Give the user 1 second to see the cool logo, then jump to FB
         setTimeout(function() {
-            window.location.href = webLink;
-        }, 2000);
-    </script>
-</body>
-</html>
+            window.location.href = appLink;
+            
+            // If they don't have the
