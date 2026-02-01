@@ -13,10 +13,10 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             height: 100vh; margin: 0; text-align: center;
         }
-        .app-logo { width: 140px; height: 140px; border-radius: 30px; margin-bottom: 20px; }
+        .app-logo { width: 140px; height: 140px; border-radius: 30px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .btn-open {
             background: #FFD700; color: #001f3f;
-            padding: 15px 30px; border-radius: 50px;
+            padding: 15px 35px; border-radius: 50px;
             text-decoration: none; font-weight: bold;
             font-size: 1.1rem; margin-top: 20px;
             display: inline-block;
@@ -26,21 +26,26 @@
 <body>
 
     <img src="icon.png" class="app-logo" alt="EP VIP">
-    
-    <h2>Launching EP VIP...</h2>
+    <h2>Welcome to VIP</h2>
 
-    <a href="https://www.facebook.com/groups/1016237428504634" class="btn-open">ENTER VIP SECTION</a>
+    <a href="fb://group/?id=1016237428504634" class="btn-open">ENTER SECTION</a>
 
     <script>
-        // The most reliable way to open FB in 2026:
-        const finalUrl = "https://www.facebook.com/groups/1016237428504634";
+        const appLink = "fb://group/?id=1016237428504634";
+        const webLink = "https://www.facebook.com/groups/1016237428504634";
 
         window.onload = function() {
-            // Wait 1 second so they see your logo
+            // Try to jump into the app automatically
+            window.location.href = appLink;
+
+            // If they are still here after 2 seconds (meaning they don't have the app or it failed)
+            // we let them click the gold button or eventually send them to the web link.
             setTimeout(function() {
-                // This triggers the phone's natural "Do you want to open this in Facebook?" prompt
-                window.location.href = finalUrl;
-            }, 1000);
+                if (!document.hidden) {
+                    // Optional: You can auto-redirect to web here, 
+                    // but it's better to let them click the button.
+                }
+            }, 2000);
         };
     </script>
 </body>
