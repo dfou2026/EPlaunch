@@ -10,58 +10,63 @@
             background: #001f3f; 
             color: white; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            height: 100vh; 
-            margin: 0; 
-            text-align: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            height: 100vh; margin: 0; text-align: center;
         }
-        /* This makes your sunset logo look like a nice app icon */
         .app-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            width: 140px; height: 140px; border-radius: 30px;
+            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        .btn-open {
+            background: #FFD700; color: #001f3f;
+            padding: 15px 30px; border-radius: 50px;
+            text-decoration: none; font-weight: bold;
+            font-size: 1.1rem; margin-top: 20px;
+            display: inline-block; transition: transform 0.2s;
+        }
+        .btn-open:active { transform: scale(0.95); }
         .loader {
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid #FFD700;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #FFD700;
+            border-radius: 50%; width: 24px; height: 24px;
+            animation: spin 1s linear infinite; display: inline-block;
+            vertical-align: middle; margin-right: 10px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .manual-link {
-            margin-top: 30px;
-            color: rgba(255,255,255,0.5);
-            text-decoration: underline;
-            font-size: 0.8rem;
-        }
     </style>
 </head>
 <body>
 
-    <img src="icon.png" class="app-logo" alt="EP VIP Logo">
+    <img src="icon.png" class="app-logo" alt="EP VIP">
+    
+    <div id="status-area">
+        <div class="loader"></div>
+        <span style="font-size: 1.2rem;">Connecting to VIP...</span>
+    </div>
 
-    <div class="loader"></div>
-    <h2>Opening EP VIP...</h2>
-
-    <a id="fallback" class="manual-link" href="https://www.facebook.com/groups/1016237428504634">
-        Click here if not redirected
-    </a>
+    <a href="fb://group/1016237428504634" class="btn-open" id="manual-btn">ENTER VIP SECTION</a>
 
     <script>
         const groupId = "1016237428504634";
         const appLink = "fb://group/" + groupId;
         const webLink = "https://www.facebook.com/groups/" + groupId;
 
-        // Give the user 1 second to see the cool logo, then jump to FB
-        setTimeout(function() {
+        function tryRedirect() {
+            // Try to open the app
             window.location.href = appLink;
-            
-            // If they don't have the
+
+            // Fallback to web if they are still on this page after 3 seconds
+            setTimeout(function() {
+                if (!document.hidden) {
+                    window.location.href = webLink;
+                }
+            }, 3000);
+        }
+
+        // Run the redirect after 1.5 seconds to ensure the page is "awake"
+        window.onload = function() {
+            setTimeout(tryRedirect, 1500);
+        };
+    </script>
+</body>
+</html>
