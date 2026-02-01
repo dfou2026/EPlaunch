@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="manifest" href="manifest.json">
-    <title>Enjoy Pinellas VIP</title>
-</head>
-<body style="background:#1877F2; color:white; text-align:center; padding-top:50px;">
-    <h1>Opening the magic...</h1>
-    <script>
-        window.location.href = "https://www.facebook.com/groups/1016237428504634";
-    </script>
-</body>
-</html>
+<script>
+    // 1. Get your Group ID (the numbers at the end of your FB link)
+    // Example: if your link is facebook.com/groups/12345, the ID is 12345
+    const groupId = "YOUR_GROUP_ID_HERE"; 
+    
+    // 2. These are the "Deep Links" that trigger the App
+    const appLink = "fb://group/" + groupId;
+    const webLink = "https://www.facebook.com/groups/" + groupId;
+
+    // 3. Try to open the app
+    window.location.href = appLink;
+
+    // 4. If they are still here after 2 seconds, open the website instead
+    setTimeout(function() {
+        window.location.href = webLink;
+    }, 2000);
+</script>
